@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makeup, Then and Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:      #FBF4EA;
+    --paper-dim:  #F3EADB;
+    --ink:        #2A2320;
+    --ink-soft:   #5C534C;
+    --maroon:     #6E2A34;
+    --maroon-dim: #8C4650;
+    --coral:      #C6553B;
+    --coral-dim:  #E0937E;
+    --gold:       #A9803F;
+    --line:       rgba(42,35,32,0.14);
+    --card:       #ffffff;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Playfair Display', serif;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  p{ margin: 0 0 1em 0; max-width: 62ch; color: var(--ink-soft); }
+
+  img{ max-width: 100%; display:block; }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Top bar ---------- */
+
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 28px 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .topbar .mark{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: 1.15rem;
+    letter-spacing:0.01em;
+  }
+  .topbar .mark em{ font-style: normal; color: var(--maroon); }
+  .topbar .years{
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero{
+    padding: 40px 0 90px;
+  }
+  .hero-text{
+    max-width: 760px;
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .accent-old{ color: var(--maroon); font-style: italic; }
+  .hero h1 .accent-new{ color: var(--coral); font-style: italic; }
+  .hero p.lede{
+    margin: 26px auto 0;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+
+  .hero-duo{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: end;
+  }
+  .hero-duo figure{ margin:0; position:relative; }
+  .hero-duo img{
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    background: var(--paper-dim);
+  }
+  .hero-duo .then img{ border-radius: 4px 4px 4px 40px; filter: sepia(0.18) contrast(1.02); }
+  .hero-duo .now img{ border-radius: 40px 4px 4px 4px; }
+  .hero-duo figcaption{
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .hero-duo .then figcaption{ text-align:left; }
+  .hero-duo .now figcaption{ text-align:right; }
+  .era-tag{
+    display:inline-block;
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .then .era-tag{ color: var(--maroon); }
+  .now .era-tag{ color: var(--coral); }
+
+  /* ---------- Section scaffolding ---------- */
+
+  section.topic{
+    padding: 86px 0;
+    border-top: 1px solid var(--line);
+  }
+  section.topic.tinted{ background: var(--paper-dim); }
+
+  .topic-head{
+    max-width: 640px;
+    margin: 0 auto 52px;
+    text-align:center;
+  }
+  .topic-head .kicker{
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+  .topic-head h2{
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin-bottom: 14px;
+  }
+  .topic-head p{ margin: 0 auto; }
+
+  .compare{
+    display:grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: start;
+  }
+  .compare .col{
+    padding: 6px 32px;
+  }
+  .compare .col.old{ border-right: none; }
+  .compare .divider{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    padding-top: 6px;
+  }
+  .divider .dot{
+    width: 10px; height:10px; border-radius:50%;
+    background: var(--gold);
+    margin-bottom: 10px;
+  }
+  .divider .stem{
+    width:1px; flex:1;
+    background: var(--line);
+    min-height: 220px;
+  }
+
+  .col .label{
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+  }
+  .col.old .label{ color: var(--maroon); }
+  .col.new .label{ color: var(--coral); }
+
+  .col figure{ margin: 0 0 18px 0; }
+  .col img{
+    width:100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--paper-dim);
+  }
+  .col.old img{ filter: sepia(0.15) contrast(1.02); }
+  .col figcaption{
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  .col ul{
+    padding-left: 18px;
+    margin: 16px 0 0;
+    color: var(--ink-soft);
+  }
+  .col li{ margin-bottom: 8px; }
+
+  /* ---------- Timeline strip ---------- */
+
+  .timeline{
+    padding: 90px 0;
+    border-top: 1px solid var(--line);
+  }
+  .timeline-track{
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    gap: 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .timeline-item{ position: relative; }
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-33.5px;
+    top: 4px;
+    width: 11px; height: 11px;
+    border-radius:50%;
+    background: var(--paper);
+    border: 2px solid var(--gold);
+  }
+  .timeline-item .year{
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+  .timeline-item h3{ font-size: 1.1rem; margin-bottom: 6px; }
+  .timeline-item p{ margin: 0; }
+
+  /* ---------- Closing ---------- */
+
+  .closing{
+    padding: 100px 0 60px;
+    text-align:center;
+  }
+  .closing h2{
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    max-width: 680px;
+    margin: 0 auto 20px;
+  }
+  .closing p{ margin: 0 auto; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 32px 0 40px;
+  }
+  footer .wrap{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    justify-content: space-between;
+    align-items:center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  footer a{ color: var(--ink-soft); }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 820px){
+    .hero-duo{ grid-template-columns: 1fr; }
+    .hero-duo img{ height: 260px; }
+    .compare{ grid-template-columns: 1fr; }
+    .divider{ flex-direction: row; padding: 18px 0; }
+    .divider .stem{ width: auto; height:1px; flex:1; min-height:0; margin-left:10px; }
+    .compare .col{ padding: 0 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="mark">Makeup, <em>Then</em> &amp; Now</div>
+    <div class="years">A history in contrasts</div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <h1>The same goal, <span class="accent-old">a century</span> apart from <span class="accent-new">itself</span></h1>
+        <p class="lede">Makeup has always done the same job: help people present themselves the way they want to be seen. What has changed, again and again, is the chemistry, the tools, and the idea of who gets to be beautiful. This page walks through that change, one honest comparison at a time — no products, no brands, just how things used to be done and how they're done today.</p>
+      </div>
+      <div class="hero-duo">
+        <figure class="then">
+          <span class="era-tag">Circa 1950s</span>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vintage_Ad_for_Hazel_Bishop_No-Smear_Lipstick_(8748326681).jpg?width=800" alt="A vintage 1950s lipstick advertisement" loading="lazy">
+          <figcaption>Lipstick advertising leaned on a single, uniform idea of glamour.</figcaption>
+        </figure>
+        <figure class="now">
+          <span class="era-tag">Today</span>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Makeup_composition.jpg?width=900" alt="A modern flat-lay arrangement of cosmetics" loading="lazy">
+          <figcaption>Modern makeup is sold as a personal toolkit, not a single look.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- INGREDIENTS -->
+  <section class="topic">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">What it's made of</div>
+        <h2>Ingredients and safety</h2>
+        <p>The biggest difference between old and new makeup isn't the color — it's what's actually inside the container, and how much anyone checked before it reached a shelf.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <ul>
+            <li>Formulas commonly contained lead, mercury, or arsenic-based compounds, often to whiten skin or preserve color.</li>
+            <li>Little to no regulatory testing existed before a product went on sale.</li>
+            <li>Ingredient lists were rarely printed or explained to the buyer.</li>
+            <li>Reactions and long-term harm were discovered by users, not labs.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <ul>
+            <li>Formulas go through dermatological and safety testing before release.</li>
+            <li>Full ingredient lists are printed on packaging and searchable online.</li>
+            <li>Skincare ingredients — hyaluronic acid, SPF, peptides — are blended directly into makeup.</li>
+            <li>Independent watchdogs and regulators can flag unsafe products publicly.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHADE RANGE -->
+  <section class="topic tinted">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">Who it was made for</div>
+        <h2>Shade ranges and who got left out</h2>
+        <p>For most of makeup's history, "your shade" meant whichever of three or four options was closest. That has changed more in the last decade than in the previous fifty years.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <figure>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vintage_Kigu_Powder_Compact,_Made_in_England_(9052004747).jpg?width=800" alt="A vintage powder compact" loading="lazy">
+            <figcaption>A vintage powder compact — one shade of powder, made for one narrow idea of skin.</figcaption>
+          </figure>
+          <ul>
+            <li>Foundation and powder ranges typically offered a handful of shades.</li>
+            <li>Products were designed around a single, narrow beauty standard.</li>
+            <li>Darker and deeper skin tones were routinely underserved or ignored.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <figure>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Make_Up_Flat_Lay_for_Background.jpg?width=900" alt="A modern makeup flat lay with varied products" loading="lazy">
+            <figcaption>A wider, more considered range is now treated as a baseline, not a bonus.</figcaption>
+          </figure>
+          <ul>
+            <li>Extended shade ranges — often 20 to 50+ options — are now common at launch.</li>
+            <li>Undertone matching (warm, cool, neutral) is standard shopping language.</li>
+            <li>Inclusivity is treated as a baseline expectation, not a special edition.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="topic">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">How it was applied</div>
+        <h2>Tools and technique</h2>
+        <p>The tools in a makeup bag say a lot about how much control and precision people were expected to want.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <ul>
+            <li>Fingertips, small pads, and stiff brushes did most of the work.</li>
+            <li>Blending was minimal — colors were applied more flatly, in blocks.</li>
+            <li>A hand mirror or vanity mirror was the only feedback tool available.</li>
+            <li>Techniques were passed down informally, through family or magazines.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <ul>
+            <li>Sponges, dense synthetic brushes, and airbrush tools allow fine blending.</li>
+            <li>Layering techniques (contour, color-correct, set, bake) are widely taught.</li>
+            <li>Ring lights and front-facing cameras act as a second, brutally honest mirror.</li>
+            <li>Technique is learned from step-by-step video tutorials, at any skill level.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAUTY IDEAL -->
+  <section class="topic tinted">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">What it was supposed to achieve</div>
+        <h2>The idea of "a good look"</h2>
+        <p>Makeup used to sell one look at a time. Today it sells the idea that a look is something you choose, not something you're handed.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <figure>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vintage_1950s_Rhinestone_Lipstick_Mirror_Combination,_2_Inch_Round_Mirror_(10027254456).jpg?width=800" alt="A vintage lipstick and mirror combination" loading="lazy">
+            <figcaption>Compact, mirror, lipstick — a small, standardized kit for a standardized look.</figcaption>
+          </figure>
+          <ul>
+            <li>Film stars and studio publicity largely set the one "correct" look of an era.</li>
+            <li>Bold red lips or a defined brow were treated as universal finishing touches.</li>
+            <li>Deviating from the current look could be read as careless or unfashionable.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <figure>
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Make_Up_Set,_Palettes_and_Brushes_-_50921483638.jpg?width=900" alt="A modern set of makeup palettes and brushes" loading="lazy">
+            <figcaption>A modern kit is built for range: many looks, chosen on purpose, day to day.</figcaption>
+          </figure>
+          <ul>
+            <li>"No-makeup makeup," bold color, and editorial styles all coexist as valid choices.</li>
+            <li>Influencers and everyday creators shape trends alongside celebrities.</li>
+            <li>Makeup is talked about as self-expression rather than a single obligation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS & TECH -->
+  <section class="topic">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">How it reached people</div>
+        <h2>Shopping, testing, and technology</h2>
+        <p>Buying makeup used to mean trusting a counter clerk's judgment. Now it can mean previewing a color on your own face before you spend a rupee.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <ul>
+            <li>Department store counters were often the only place to see and test products.</li>
+            <li>Staff recommendations carried enormous weight over what people bought.</li>
+            <li>Returns and refunds were rare, so a wrong shade was simply a loss.</li>
+            <li>Product information traveled through print ads and word of mouth.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <ul>
+            <li>Online shade-matching tools and augmented-reality try-on reduce guesswork.</li>
+            <li>Independent reviews and swatch videos are available before purchase.</li>
+            <li>Direct-to-door delivery and easier returns lower the risk of trying something new.</li>
+            <li>Ingredient scanners and apps let anyone check a formula in seconds.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY -->
+  <section class="topic tinted">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">What happens after</div>
+        <h2>Packaging and afterthought</h2>
+        <p>Even the question of what happens once a product is empty is a fairly recent one to take seriously.</p>
+      </div>
+      <div class="compare">
+        <div class="col old">
+          <div class="label">Then</div>
+          <ul>
+            <li>Compacts and cases were sometimes reused, but mostly out of necessity, not principle.</li>
+            <li>Packaging waste and animal testing were not part of the public conversation.</li>
+            <li>Products rarely disclosed how or where they were manufactured.</li>
+          </ul>
+        </div>
+        <div class="divider"><div class="dot"></div><div class="stem"></div></div>
+        <div class="col new">
+          <div class="label">Now</div>
+          <ul>
+            <li>Refillable compacts and recyclable packaging are actively marketed features.</li>
+            <li>Cruelty-free and vegan formulation claims are commonly disclosed upfront.</li>
+            <li>Supply chains and sourcing are increasingly part of what buyers ask about.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="wrap">
+      <div class="topic-head">
+        <div class="kicker">In brief</div>
+        <h2>A short timeline of change</h2>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-item">
+          <div class="year">Early 1900s</div>
+          <h3>Makeup becomes mass-produced</h3>
+          <p>Cosmetics move out of home recipes and into factory-made tins, tubes, and compacts sold across department stores.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">1940s – 1950s</div>
+          <h3>One look, widely copied</h3>
+          <p>Studio-era film glamour defines a fairly uniform standard: red lips, arched brows, powdered skin — with little shade variety.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">1970s – 1980s</div>
+          <h3>Regulation starts to catch up</h3>
+          <p>Growing awareness of harmful ingredients leads to the first serious safety rules and ingredient disclosure requirements in several countries.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2000s</div>
+          <h3>The internet opens the counter</h3>
+          <p>Reviews, forums, and early tutorial videos let ordinary people compare notes that used to live only with sales staff.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2010s – today</div>
+          <h3>Inclusive ranges and digital try-on</h3>
+          <p>Extended shade ranges, augmented-reality previews, and ingredient-conscious formulas become expected, not exceptional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <h2>Same purpose, better-informed choices</h2>
+      <p style="margin-left:auto;margin-right:auto;">Old makeup wasn't foolish, and new makeup isn't automatically perfect — every era does its best with what it knows. What's genuinely different today is the amount of information, safety testing, and choice available to the person holding the product. Knowing that history is part of using it well.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>Made for general reading — not affiliated with, and not promoting, any brand or product.</span>
+      <span>Historical images via Wikimedia Commons, used under their respective Creative Commons licenses.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
